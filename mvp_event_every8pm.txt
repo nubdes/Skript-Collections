@@ -1,0 +1,88 @@
+prontera,156,149,3	script	MVP Event Warper	100,{
+
+	mes "[ "+strnpcinfo(0)+" ]";
+	mes "Would you like to participate in the MVP Event?";
+	switch(select("Yes, Warp me now.:Nope just passing by..")){
+		case 1:
+			warp "n_castle",0,0;
+			end;
+		case 2:
+			close;
+	}
+
+OnHour20:
+	announce "The MVP Event warper has shown, Talk to the npc at prontera 156 149.",0;
+	hideoffnpc "MVP Event Warper";
+	goto START_MVP;
+	end;
+
+START_MVP:
+	set .mobcount,0;
+	set .mobcount,43;
+	monster "n_castle",0,0,"Amon Ra",1511,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Atroce",1785,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"White Lady",1630,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Baphomet",1039,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Dark Lord",1272,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Detale",1719,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Doppelganger",1046,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Dracula",1389,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Drake",1112,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Eddga",1115,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Evil Snake Lord",1418,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Garm",1252,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Golden Thief Bug",1086,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Gopinich",1885,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Incantation Samurai",1492,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Stormy Knight",1251,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Lady Tanee",1688,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Lord of Death",1373,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Maya",1147,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Mistress",1059,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Moonlight Flower",1150,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Orc Hero",1087,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Orc Lord",1190,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Osiris",1038,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Pharaoh",1157,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Phreeoni",1159,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"RSX-0806",1623,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Tao Gunka",1583,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Turtle General",1312,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Egnigem Cenia",1658,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Ifrit",1832,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Ktullanux",1779,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Kiel D-01",1733,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Gloom Under Night",1768,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Fallen Bishop Hibram",1871,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Thanatos",1708,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Valkyrie Randgris",1751,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Wounded Morroc",1917,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Lord Knight Seyren",1646,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Assassin Cross Eremes",1647,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Whitesmith Harword",1648,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"High Priest Magaleta",1649,1,"MVP Event Warper::OnMyMVPDead";
+	monster "n_castle",0,0,"Sniper Shecil",1650,1,"MVP Event Warper::OnMyMVPDead";
+	end;
+
+OnMyMVPDead:
+	set .mobcount,.mobcount-1;
+	announce "[ "+ strcharinfo(0) +" ] has killed an MVP - "+.mobcount+" MVP Left -",0;
+	if(.mobcount == 0) goto OnEnd;
+	end;
+
+OnEnd:
+OnClock2015:
+	announce "[MVP Event Manager]: all mvp's has met its demised, in 5 seconds all participants will be teleported back to Main Town.",0;
+	killmonsterall "n_castle";
+	sleep2 5000;
+	announce "The MVP Event warper has vanished, The event will open again tomorrow at exactly 20:00 SERVER TIME.",0;
+	hideonnpc "MVP Event Warper";
+	mapwarp "n_castle","prontera",156,191;
+	end;
+
+OnInit:
+	hideonnpc "MVP Event Warper";
+	bindatcmd "mvpon",strnpcinfo(3)+"::OnHour20";
+	bindatcmd "mvpoff",strnpcinfo(3)+"::OnEnd";
+	end;
+}
